@@ -14,6 +14,7 @@ st.title('Краткий пересказ текстов')
 text = st.text_area('Введите текст')
 
 # запускаем модель
+load_model = st.cache_resource(load_model)
 summary = load_model()
 
 st.write('Краткий пересказ')
