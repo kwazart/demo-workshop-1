@@ -27,7 +27,7 @@ freeze:
 # Запуск
 .PHONY: run
 run:
-	(. ./venv/bin/activate; streamlit run main.py)
+	(. ./venv/bin/activate; streamlit run main.py --server.port 8080)
 
 # Запуск тестов
 .PHONY: test

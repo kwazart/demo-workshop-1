@@ -72,13 +72,33 @@ Web-интерфейс написан на [Streamlit](https://streamlit.io/)
     - добавление правил в github на дальнейшие доработки проекта (commit и pull request)
   
 ## Начало работы
-1. Убедитесь, что у Вас установлена утилита **make** ([пример установки для windows](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows))
-2. Перейдите в директорию со скаченным проектом ```cd demo-workshop-1```
-3. Запустите утилиту **make**
-4. Откройте браузер и перейдите по адресу http://[ВАШ_IP_ADDRESS]:8501 (адрес можно взять из логов запуска проекта)
-5. Дождитесь загрузки модели (во время загрузки будет отображена строка *Running load_model()*) ![load-model](https://github.com/kwazart/demo-workshop-1/assets/46990077/416ab68a-16ea-448d-a1e7-60cd000b9fea)
-6. После загрузки можете ввести свой текст в текстовое поле и далее нажмите кнопки **Применить**![using](https://github.com/kwazart/demo-workshop-1/assets/46990077/37401c25-9105-4022-8d2d-eb311c641f26)
-7. После обработки вашего текста (время обработки зависит от аппаратных возможностей) будет выведен результат в зеленом блоке ![final](https://github.com/kwazart/demo-workshop-1/assets/46990077/f66f8bb0-5ba9-412f-97e1-d3158c1bb0c2)
+1. Запуск:
+   
+   __Локальный запуск:__
+
+   * Стянут проект `git clone git@github.com:kwazart/demo-workshop-1.git`
+   * Перейти в проект `cd demo-workshop-1`
+   * Если не установлена - установить утилиту `make` командой `sudo apt install make` ([пример установки для windows](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows))
+   * Если не установлена - установить `venv` для `python`
+   * Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
+   * Запустить командой `make run`
+
+   __Запуск в облаке:__
+
+   * Подключиться к ВМ в облаке по ssh
+   * Стянут проект по https `git clone https://github.com/kwazart/demo-workshop-1.git`
+   * Перейти в проект `cd demo-workshop-1`
+   * Установить утилиту `make` командой `sudo apt install make`
+   * Установить `venv` для `python` командой `sudo apt install python3.10-venv`
+   * Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
+   * Запустить командой `make run`
+
+2. Откройте браузер и перейдите по адресу `http://[ВАШ_IP_ADDRESS]:8080` (адрес можно взять из логов запуска проекта):
+   * Если запускали локально - http://localhost:8080/
+   * WEB приложение развёрнуто в яндекс облаке по адресу - http://158.160.137.157:8080/
+3. Дождитесь загрузки модели (во время загрузки будет отображена строка *Running load_model()*) ![load-model](https://github.com/kwazart/demo-workshop-1/assets/46990077/416ab68a-16ea-448d-a1e7-60cd000b9fea)
+4. После загрузки можете ввести свой текст в текстовое поле и далее нажмите кнопки **Применить**![using](https://github.com/kwazart/demo-workshop-1/assets/46990077/37401c25-9105-4022-8d2d-eb311c641f26)
+5. После обработки вашего текста (время обработки зависит от аппаратных возможностей) будет выведен результат в зеленом блоке ![final](https://github.com/kwazart/demo-workshop-1/assets/46990077/f66f8bb0-5ba9-412f-97e1-d3158c1bb0c2)
 
 
 ## Заключение
