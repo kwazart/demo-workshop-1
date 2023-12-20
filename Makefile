@@ -27,7 +27,7 @@ freeze:
 # Запуск
 .PHONY: run
 run:
-	(. ./venv/bin/activate; streamlit run src/ui/client.py)
+	(. ./venv/bin/activate; streamlit run main.py)
 
 # Запуск тестов
 .PHONY: test

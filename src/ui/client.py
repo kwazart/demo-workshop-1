@@ -1,31 +1,28 @@
-import streamlit as st
 import torch
-import sys
-import os
+import streamlit as st
+from src.model.model import load_tokenizer_and_model, get_text
 
-# model_path необходимо установить исходя из директории откуда запусается приложение
-# дефолтный запуск приложения из src "streamlit run src/ui/client.py"
-model_path = os.path.abspath('src/model')
-sys.path.append(model_path)
+def client():
+    # определяем на чем будем запускать модель
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
 
-from model import load_model, get_text
+    st.title('Краткий пересказ текстов')
+    # получаем текст от клиента
+    text = st.text_area('Введите текст')
 
-# определяем на чем будем запускать модель
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-else:
-    device = torch.device("cpu")
+    # загружаем модель и токенизатор. Кешируем в Streamlit
+    @st.cache_resource()
+    def load_model():
+        tokenizer, model = load_tokenizer_and_model()
+        return (tokenizer, model)
 
-st.title('Краткий пересказ текстов')
-# получаем текст от клиента
-text = st.text_area('Введите текст')
+    tokenizer, model = load_model()
 
-# запускаем модель
-load_model = st.cache_resource(load_model)
-summary = load_model()
+    st.write('Краткий пересказ')
 
-st.write('Краткий пересказ')
-
-if st.button('Применить'):
-    # вывод решения на экран
-    st.success(get_text(summary, text))
+    if st.button('Применить'):
+        # вывод решения на экран
+        st.success(get_text(tokenizer, model, text))

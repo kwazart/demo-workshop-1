@@ -1,6 +1,6 @@
-from src.model.model import load_model, get_text
+from src.model.model import load_tokenizer_and_model, get_text
 
-summarizer = load_model()
+tokenizer, model = load_tokenizer_and_model()
 
 text = """
 Актуальность проблемы. Электронная информация играет все большую роль во всех сферах жизни современного общества. \
@@ -20,10 +20,11 @@ text = """
 """
 
 
-def test_load_model():
-    assert summarizer != None
+def test_load_tokenizer_and_model():
+    assert tokenizer != None
+    assert model != None
 
 
 def test_get_text():
-    sum_text = get_text(summarizer, text)
-    assert isinstance(sum_text, str)
+    summary = get_text(tokenizer, model, text)
+    assert isinstance(summary, str)

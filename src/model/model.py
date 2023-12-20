@@ -1,38 +1,91 @@
-from transformers import pipeline
+from transformers import MBartTokenizer, MBartForConditionalGeneration
 
 
-def load_model():
+def load_tokenizer_and_model():
     """Загрузка предобученной модели для суммаризации текста.
+    Модель обучена на массиве статей с сайта gazeta.ru.
+    Модель может неадекватно обрабатывать некоторые виды входящего текста.
 
     Returns
     -------
-    summarizer: Pipeline
-        Функция Pipeline суммаризации текста.
+    tokenizer : MBartTokenizer
+        Токенизатор
+    model : MBartForConditionalGeneration
+        Модель
     """
 
     model_name = "IlyaGusev/mbart_ru_sum_gazeta"
-    summarizer = pipeline(
-        "summarization", model=model_name, tokenizer=model_name)
-    return summarizer
+    tokenizer = MBartTokenizer.from_pretrained(model_name)
+    model = MBartForConditionalGeneration.from_pretrained(model_name)
+    return (tokenizer, model)
 
 
-def get_text(summarizer, text):
+def get_text(tokenizer, model, text):
     """Функция суммаризации текста.
 
     Parameters
     ----------
-    summarizer : Pipeline
-        Функция возвращаемая load_model() -> Pipeline
+    tokenizer : MBartTokenizer
+        Токенизатор
+    model : MBartForConditionalGeneration
+        Модель
     text : str
         Текст для обработки моделью.
 
     Returns
     -------
-    sum_text : str
+    summary : str
         Суммаризированный текст.
     """
 
-    summary = summarizer(text, max_length=600, min_length=50,
-                         length_penalty=2.0, no_repeat_ngram_size=4)
-    sum_text = summary[0]['summary_text']
-    return sum_text
+    if text == "": return ""                    # Проверка на пустую строку. Иначе модель выдаст неадекватный результат.
+
+    model_inputs = tokenizer(
+        [text],                                 # Тест для токенизации (разделения на части) и векторизации.
+        max_length=1024,                        # Максимальная количество токенов в векторе. Максимум модели 1024.
+        padding="max_length",                   # Если токенов в векторе меньше чем max_length, то дополнить длинну пустыми токенами.
+        truncation=True,                        # Если токенов в векторе больше чем max_length, то включить усечение.
+        return_tensors="pt"                     # Использовать библиотеку PyTorch для векторизации.
+    )
+    input_ids = model_inputs["input_ids"]       # Вектор входящего текста.
+    input_length = input_ids.shape[1]           # Сюда попадает значение max_length.
+    _min_length = int(input_length * 0.05)      # Минимальное количество токенов в результирующем векторе. Установлено как 5% от max_length.
+    min_length = _min_length if _min_length <= 200 else 200             # Должно быть меньше или равно 200.
+
+    model_outputs = model.generate(
+        input_ids=input_ids,                    # Векторизированный текст передаётся модели.
+        min_length=min_length,
+        no_repeat_ngram_size=4                  # Последовательности из N значений данного размера могут встречаться 1 раз.
+    )
+    output_ids = model_outputs[0]               # Вектор исходящего текcта.
+
+    summary = tokenizer.decode(output_ids, skip_special_tokens=True)    # Декодирование - превращение вектора в текст.
+    return summary
+
+
+# ---------------------------------------------Для разработки и отладки-----------------------------------------------------
+def main():
+    text = """
+    Актуальность проблемы. Электронная информация играет все большую роль во всех сферах жизни современного общества. \
+    В последние годы объем научно-технической текстовой информации в электронном виде возрос настолько, что возникает угроза \
+    обесценивания этой информации в связи с трудностями поиска необходимых сведений среди множества доступных текстов. \
+    Развитие информационных ресурсов Интернет многократно усугубило проблему информационной перегрузки. В этой ситуации \
+    особенно актуальными становятся методы автоматизации реферирования текстовой информации, то есть методы получения \
+    сжатого представления текстовых документов–рефератов (аннотаций). Постановка  проблемы  автоматического реферирования \
+    текста и соответственно попытки ее решения с использованием различных подходов предпринимались многими исследователями. \
+    История применения вычислительной техники для реферирования  насчитывает уже более 50 лет и связана с именами таких \
+    исследователей, как Г.П. Лун, В.Е. Берзон, И.П. Cевбо, Э.Ф. Скороходько, Д.Г. Лахути, Р.Г. Пиотровский и др. За эти \
+    годы  выработаны  многочисленные подходы к решению данной проблемы, которые достаточно четко подразделяются на два \
+    направления: автоматическое реферирование, основанное на экстрагировании из первичных документов с помощью определенных \
+    формальных признаков «наиболее информативных» фраз (фрагментов), совокупность которых образует некоторый экстракт; \
+    автоматическое реферирование, основанное на выделении из текстов с помощью специальных информационных языков наиболее \
+    существенной информации и порождении новых текстов (рефератов), содержательно обобщающих первичные  документы.
+    """
+
+    tokenizer, model = load_tokenizer_and_model()
+    summary = get_text(tokenizer, model, text)
+    print(summary)
+
+
+if __name__ == "__main__":
+    main()
