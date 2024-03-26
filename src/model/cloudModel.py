@@ -3,12 +3,12 @@ from transformers import pipeline
 
 def load_cloud_model():
     model_pipeline = pipeline(
-        task="question-answering", model="deepset/roberta-base-squad2"
-    )
+        "question-answering", "timpal0l/mdeberta-v3-base-squad2"
+        )
     return model_pipeline
 
 
 # Функция запуска модели
-def execute(cloud_model, question, text):
-    result = cloud_model(question=question, context=text)
+def execute(cloud_model, question, context):
+    result = cloud_model(question=question, context=context)
     return result["answer"]

@@ -14,10 +14,9 @@ def launch_app():
     st.title("Краткий пересказ текстов и ответы на вопросы")
     # получаем текст от клиента
     text = st.text_area("Введите текст")
-    question = st.text_input(label="Введите вопрос", value=" ")
     text_cloud = text
 
-    # загружаем модель и токенизатор. Кешируем в Streamlit
+    # загружаем модели и токенизатор. Кешируем в Streamlit
     @st.cache_resource()
     def load_model():
         tokenizer = load_tokenizer()
@@ -29,15 +28,11 @@ def launch_app():
 
     st.write("Краткий пересказ")
 
-    if st.button("Применить"):
+    if st.button("Получить краткий пересказ"):
         # вывод решения на экран
         st.success(make_summary_text(tokenizer, model, text))
 
-    if text_cloud == " " or question == " ":
-        disabled = True
-    else:
-        disabled = False
-
-    executed = st.button(label="Выполнить", disabled=disabled)
+    question = st.text_input(label="Задайте вопрос", value=" ")
+    executed = st.button(label="Получить ответ на вопрос")
     if executed:
         execute(model_cloud, question, text_cloud)
