@@ -35,4 +35,4 @@ def launch_app():
     question = st.text_input(label="Задайте вопрос", value=" ")
     executed = st.button(label="Получить ответ на вопрос")
     if executed:
-        execute(model_cloud, question, text_cloud)
+        st.success(execute(model_cloud, question, text_cloud))
