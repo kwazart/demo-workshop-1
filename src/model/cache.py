@@ -14,8 +14,10 @@ class LocalCacheLRU(object):
         self.key_capacity = []
 
     def set(self, key, value):
+        if key not in self.cache:
+            self.key_capacity.append(key)
+
         self.cache[key] = value
-        self.key_capacity.append(key)
 
         if len(self.cache) > self.size:
             del_key = self.key_capacity.pop(0)
