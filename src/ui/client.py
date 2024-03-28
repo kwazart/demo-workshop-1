@@ -1,7 +1,7 @@
 import torch
 import streamlit as st
 from src.model.model import load_tokenizer, load_bart_model, make_summary_text
-from src.model.cloudModel import load_cloud_model, execute
+from src.model.cloud_model import load_cloud_model, execute
 
 
 def launch_app():
@@ -32,7 +32,7 @@ def launch_app():
         # вывод решения на экран
         st.success(make_summary_text(tokenizer, model, text))
 
-    question = st.text_input(label="Задайте вопрос", value=" ")
+    question = st.text_input(label="Задайте вопрос")
     executed = st.button(label="Получить ответ на вопрос")
     if executed:
         st.success(execute(model_cloud, question, text_cloud))

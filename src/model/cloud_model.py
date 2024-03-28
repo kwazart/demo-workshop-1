@@ -10,5 +10,11 @@ def load_cloud_model():
 
 # Функция запуска модели
 def execute(cloud_model, question, context):
+    # Проверка на пустую строку
+    if context == "":
+        return "Введите текст в окно выше"
+    if question == "":
+        return "Введите вопрос в окно выше"
+    
     result = cloud_model(question=question, context=context)
     return result["answer"]
