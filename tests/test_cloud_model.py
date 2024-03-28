@@ -1,4 +1,4 @@
-from src.model.cloudModel import load_cloud_model
+from src.model.cloud_model import load_cloud_model
 
 model = load_cloud_model()
 
