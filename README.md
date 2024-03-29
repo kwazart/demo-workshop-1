@@ -116,6 +116,7 @@ Web-интерфейс написан на [Streamlit](https://streamlit.io/)
 3. Дождитесь загрузки модели (во время загрузки будет отображена строка *Running load_model()*) ![load-model](https://github.com/kwazart/demo-workshop-1/assets/46990077/416ab68a-16ea-448d-a1e7-60cd000b9fea)
 4. После загрузки можете ввести свой текст в текстовое поле и далее нажмите кнопки __Применить__![using](https://github.com/kwazart/demo-workshop-1/assets/46990077/37401c25-9105-4022-8d2d-eb311c641f26)
 5. После обработки вашего текста (время обработки зависит от аппаратных возможностей) будет выведен результат в зеленом блоке ![final](https://github.com/kwazart/demo-workshop-1/assets/46990077/f66f8bb0-5ba9-412f-97e1-d3158c1bb0c2)
+6. Ввести вопрос по тексту и нажать на кнопку __Получить ответ__ ![Screenshot 2024-03-30 033251](https://github.com/kwazart/demo-workshop-1/assets/86611399/093d58e8-6b9a-4603-8e3e-fe1d7eca9a15)
 
 ## Заключение
 
