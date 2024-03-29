@@ -10,6 +10,7 @@
 | Полозов А.П.  |       artdd52669@gmail.com     |                @appolozov |
 | Бакланов И.Л. |        nymless.ib@gmail.com    |             @ivanbaklanov |
 | Архипов Д.А.  | arkhipov.danil2015@gmail.com   |               @Arkhip2000 |
+| Липатов С.В.  |    svlipatov@bk.ru             |               @SLipatov   |
 
 ## Цель проекта
 Создать систему, которая сможет автоматически анализировать и сокращать тексты, делая их более 
