@@ -1,6 +1,7 @@
 import streamlit as st
 
 
+# todo: хорошо бы добавить блокировки в LocalCacheLRU и использовать их в методах set и get (или хранить в базе)
 class LocalCacheLRU(object):
     # создадим кэш с указанным размером
     def __init__(self, size):
@@ -14,17 +15,19 @@ class LocalCacheLRU(object):
         self.key_capacity = []
 
     def set(self, key, value):
-        if key not in self.cache:
-            self.key_capacity.append(key)
+        hash_key = hash(key)
 
-        self.cache[key] = value
+        if hash_key not in self.cache:
+            self.key_capacity.append(hash_key)
+
+        self.cache[hash_key] = value
 
         if len(self.cache) > self.size:
             del_key = self.key_capacity.pop(0)
             del self.cache[del_key]
 
     def get(self, key):
-        return self.cache.get(key)
+        return self.cache.get(hash(key))
 
 
 @st.cache_resource()
