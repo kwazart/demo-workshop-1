@@ -39,12 +39,5 @@ pipeline {
                 // sh 'docker build -t summary-img'
             }
         }
-
-        // stage('Build') {
-        //     steps {
-        //         powershell 'Start-Job -ScriptBlock {streamlit run ./main.py --server.port 8000}'
-        //         // sh 'streamlit run ./main.py --server.port 8000'
-        //     }
-        // }
     }
 }
