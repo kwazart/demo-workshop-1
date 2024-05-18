@@ -15,19 +15,19 @@ pipeline {
             }
         }
 
-        stage('Set up Python environment') {
-            steps {
-                python {
-                    env.PYTHON_VERSION = "3.8"
-                    env.PIP_VERSION = "20.2.4"
-                    tool python $PYTHON_VERSION
-                    sh '''
-                        pip install --upgrade pip==${PIP_VERSION}
-                        pip install torch streamlit
-                    '''
-                }
-            }
-        }
+        // stage('Set up Python environment') {
+        //     steps {
+        //         python {
+        //             env.PYTHON_VERSION = "3.8"
+        //             env.PIP_VERSION = "20.2.4"
+        //             tool python $PYTHON_VERSION
+        //             sh '''
+        //                 pip install --upgrade pip==${PIP_VERSION}
+        //                 pip install torch streamlit
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('Install dependencies') {
             steps {
