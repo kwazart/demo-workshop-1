@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Запускаем приложение
-CMD ["python", "main.py"]
+CMD ["streamlit", "run", "main.py"]
