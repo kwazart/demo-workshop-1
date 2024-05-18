@@ -17,28 +17,28 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sudo 'pip install -r ./requirements.txt'
+                'pip install -r ./requirements.txt'
                 // sh 'pip install -r ./requirements.txt'
             }
         }
 
         stage('Saving dependencies') {
             steps {
-                sudo '-ScriptBlock pip freeze > ./requirements.txt'
+                'pip freeze > ./requirements.txt'
                 // sh 'pip freeze > ./requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                sudo 'pytest ./tests/'
+                'pytest ./tests/'
                 // sh 'pytest ./tests/'
             }
         }
 
         stage('Build') {
             steps {
-                sudo 'streamlit run ./main.py --server.port 8080'
+                'streamlit run ./main.py --server.port 8080'
                 // sh 'streamlit run ./main.py --server.port 8080'
             }
         }
