@@ -39,7 +39,7 @@ pipeline {
         stage('Build') {
             steps {
                 powershell 'Start-Job -ScriptBlock {streamlit run ./main.py --server.port 8080}'
-                // sh 'streamlit run ./main.py --server.port 8080'
+                // sh 'streamlit run ./main.py --server.port 8081'
             }
         }
     }
