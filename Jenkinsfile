@@ -17,28 +17,28 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                powershell -Command "Start-Job -ScriptBlock { pip install -r ./requirements.txt }"
+                powershell -Command "Start-Job -ScriptBlock pip install -r ./requirements.txt"
                 // sh 'pip install -r ./requirements.txt'
             }
         }
 
         stage('Saving dependencies') {
             steps {
-                powershell -Command "Start-Job -ScriptBlock { pip freeze > ./requirements.txt }"
+                powershell -Command "Start-Job -ScriptBlock pip freeze > ./requirements.txt"
                 // sh 'pip freeze > ./requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                powershell -Command "Start-Job -ScriptBlock { pytest ./tests/ }"
+                powershell -Command "Start-Job -ScriptBlock pytest ./tests/ "
                 // sh 'pytest ./tests/'
             }
         }
 
         stage('Build') {
             steps {
-                powershell -Command "Start-Job -ScriptBlock { streamlit run ./main.py --server.port 8080 }"
+                powershell -Command "Start-Job -ScriptBlock streamlit run ./main.py --server.port 8080"
                 // sh 'streamlit run ./main.py --server.port 8080'
             }
         }
