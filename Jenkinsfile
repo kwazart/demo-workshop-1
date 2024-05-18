@@ -17,25 +17,25 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install -r ./requirements.txt'
             }
         }
 
         stage('Saving dependencies') {
             steps {
-                sh 'pip freeze > requirements.txt'
+                sh 'pip freeze > ./requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'pytest tests/'
+                sh 'pytest ./tests/'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'streamlit run main.py'
+                sh 'streamlit run ./main.py'
             }
         }
     }
