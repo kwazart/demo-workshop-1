@@ -6,6 +6,10 @@
 // Запускает тесты.
 // Запускает приложение.
 
+
+// Для запуска под windows используется конструкция powershell 'Start-Job -ScriptBlock { scripts }' 
+// Для запуска под linux используется конструкция sh 'scripts'
+
 pipeline {
     agent any
     stages {
@@ -17,7 +21,7 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                powershell 'Start-Job -ScriptBlock {pip install -r ./requirements.txt}'
+                powershell 'Start-Job -ScriptBlock {pip install -r ./requirements.txt}' 
                 // sh 'pip install -r ./requirements.txt'
             }
         }
