@@ -11,25 +11,11 @@
 // Для запуска под linux используется конструкция sh 'scripts'
 
 pipeline {
-    agent any
+    agent { dockerfile true }
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/kwazart/demo-workshop-1'
-            }
-        }
-
-        stage('Install dependencies') {
-            steps {
-                powershell 'Start-Job -ScriptBlock {pip install -r ./requirements.txt}' 
-                // sh 'pip install -r ./requirements.txt'
-            }
-        }
-
-        stage('Saving dependencies') {
-            steps {
-                powershell 'Start-Job -ScriptBlock {pip freeze > ./requirements.txt}'
-                // sh 'pip freeze > ./requirements.txt'
             }
         }
 
@@ -40,11 +26,11 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                powershell 'Start-Job -ScriptBlock {streamlit run ./main.py --server.port 8080}'
-                // sh 'streamlit run ./main.py --server.port 8081'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         powershell 'Start-Job -ScriptBlock {streamlit run ./main.py --server.port 8000}'
+        //         // sh 'streamlit run ./main.py --server.port 8000'
+        //     }
+        // }
     }
 }
