@@ -17,28 +17,28 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                'pip install -r ./requirements.txt'
+                sh 'pip install -r ./requirements.txt'
                 // sh 'pip install -r ./requirements.txt'
             }
         }
 
         stage('Saving dependencies') {
             steps {
-                'pip freeze > ./requirements.txt'
+                sh 'pip freeze > ./requirements.txt'
                 // sh 'pip freeze > ./requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                'pytest ./tests/'
+                sh 'pytest ./tests/'
                 // sh 'pytest ./tests/'
             }
         }
 
         stage('Build') {
             steps {
-                'streamlit run ./main.py --server.port 8080'
+                sh 'streamlit run ./main.py --server.port 8080'
                 // sh 'streamlit run ./main.py --server.port 8080'
             }
         }
