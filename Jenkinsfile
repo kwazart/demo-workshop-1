@@ -33,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Running Tests') {
             steps {
                 powershell 'Start-Job -ScriptBlock {pytest ./tests/}'
                 // sh 'pytest ./tests/'
