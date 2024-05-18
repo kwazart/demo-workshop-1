@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/kwazart/demo-workshop-1/tree/dev'
+                git 'https://github.com/kwazart/demo-workshop-1/tree/yakunin-mlops'
             }
         }
 
