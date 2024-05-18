@@ -33,11 +33,15 @@ def launch_app():
     st.write("Краткий пересказ")
 
     summary_key = text
-    summary = cache.get(summary_key)  # сразу попробуем достать из кэша краткое содержание
+    summary = cache.get(
+        summary_key
+    )  # сразу попробуем достать из кэша краткое содержание
 
     # если нажали кнопку и в кэше нет краткого описания
     if st.button("Получить краткий пересказ") and not summary:
-        summary = make_summary_text(tokenizer, model, text)  # вычислим краткое содержание
+        summary = make_summary_text(
+            tokenizer, model, text
+        )  # вычислим краткое содержание
         cache.set(summary_key, summary)  # положим в кэш
 
     if summary:  # если есть краткое содержание - отобразим
@@ -46,12 +50,12 @@ def launch_app():
     question = st.text_input(label="Задайте вопрос")
 
     answers_key = (question, text)
-    answer = cache.get(answers_key) # сразу попробуем достать из кэша ответ на вопрос
+    answer = cache.get(answers_key)  # достаём из кэша ответ на вопрос
 
     # если нажали кнопку и в кэше нет ответа на вопрос
     if st.button(label="Получить ответ на вопрос") and not answer:
-        answer = execute(model_cloud, question, text) # получим ответ на вопрос
-        cache.set(answers_key, answer) # сохраним в кэш
+        answer = execute(model_cloud, question, text)  # получим ответ
+        cache.set(answers_key, answer)  # сохраним в кэш
 
-    if answer: # если есть ответ на вопрос - отобразим
+    if answer:  # если есть ответ на вопрос - отобразим
         st.success(answer)
