@@ -21,6 +21,12 @@ pipeline {
             }
         }
 
+        stage('Saving dependencies') {
+            steps {
+                sh 'pip freeze > requirements.txt'
+            }
+        }
+
         stage('Test') {
             steps {
                 sh 'pytest tests/'
