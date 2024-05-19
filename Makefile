@@ -7,7 +7,7 @@ venv:
 .PHONY: direct_deps
 direct_deps: venv
 	(. ./.venv/bin/activate; pip3 install \
-		transformers sentencepiece streamlit torch pytest)
+		transformers sentencepiece streamlit torch pytest flake8)
 
 # Установка пакетов указанных в `requirements.txt`
 .PHONY: deps
