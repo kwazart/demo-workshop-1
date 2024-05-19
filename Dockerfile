@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Запускаем приложение
-CMD ["streamlit run main.py --server.port 7070"]
+ENTRYPOINT ["streamlit", "run", "main.py", "--server.port", "7070"]

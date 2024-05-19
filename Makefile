@@ -49,4 +49,4 @@ docker_build:
 # docker run
 .PHONY: docker_run
 docker_run:
-	docker run -d -p 7070:7070 main.app app-img
+	docker run -d -p 7070:7070 app-img
