@@ -19,10 +19,16 @@ pipeline {
 //             }
 //         }
 
+        stage('install requirements') {
+            steps {
+                sh 'make deps'
+            }
+        }
+
         stage('Running Tests') {
             steps {
 //                 powershell 'Start-Job -ScriptBlock {pytest ./tests/}'
-                sh 'pytest ./tests/'
+                sh 'make test'
             }
         }
 
