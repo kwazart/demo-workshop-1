@@ -19,23 +19,26 @@ pipeline {
             }
         }
 
+        stage('Lint with flake8') {
+            steps {
+                sh 'make lint'
+            }
+        }
+
         stage('Running Tests') {
             steps {
-//                 powershell 'Start-Job -ScriptBlock {pytest ./tests/}'
                 sh 'make test'
             }
         }
 
         stage('Build Docker image') {
             steps {
-//                 powershell 'Start-Job -ScriptBlock {docker build -t summary-img}'
                 sh 'docker build -t summary-img'
             }
         }
 
         stage('Build Docker container') {
             steps {
-//                 powershell 'Start-Job -ScriptBlock {docker run -d -p 8000:8000 main.app summary-img}'
                 sh 'docker run -d -p 8000:8000 main.app summary-img'
             }
         }
