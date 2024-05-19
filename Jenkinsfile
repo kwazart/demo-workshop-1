@@ -13,11 +13,11 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/kwazart/demo-workshop-1'
-            }
-        }
+//         stage('Checkout') {
+//             steps {
+//                 git 'https://github.com/kwazart/demo-workshop-1'
+//             }
+//         }
 
         stage('Running Tests') {
             steps {
