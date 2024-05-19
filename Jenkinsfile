@@ -15,7 +15,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/kwazart/demo-workshop-1'
+                git clone https://github.com/kwazart/demo-workshop-1.git
+                cd demo-workshop-1
+                git checkout mlops
             }
         }
 
