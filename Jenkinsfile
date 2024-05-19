@@ -13,13 +13,7 @@
 pipeline {
     agent any
     stages {
-//         stage('Checkout') {
-//             steps {
-//                 git 'https://github.com/kwazart/demo-workshop-1'
-//             }
-//         }
-
-        stage('install requirements') {
+        stage('Install requirements') {
             steps {
                 sh 'make deps'
             }
@@ -42,7 +36,7 @@ pipeline {
         stage('Build Docker container') {
             steps {
 //                 powershell 'Start-Job -ScriptBlock {docker run -d -p 8000:8000 main.app summary-img}'
-                sh 'docker build -t summary-img'
+                sh 'docker run -d -p 8000:8000 main.app summary-img'
             }
         }
     }
