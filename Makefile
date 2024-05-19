@@ -27,7 +27,7 @@ freeze:
 # Запуск
 .PHONY: run
 run:
-	(. ./.venv/bin/activate; streamlit run main.py --server.port 8080)
+	(. ./.venv/bin/activate; streamlit run main.py --server.port 7070)
 
 # Запуск тестов
 .PHONY: test
@@ -40,3 +40,13 @@ lint:
 	(. ./.venv/bin/activate; \
 		flake8 . --exclude .venv,test --count --select=E9,F63,F7,F82 --show-source --statistics; \
 		flake8 . --exclude .venv,test --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics)
+
+# docker build
+.PHONY: docker_build
+docker_build:
+	docker build -t app-img .
+
+# docker run
+.PHONY: docker_run
+docker_run:
+	docker run -d -p 7070:7070 main.app app-img

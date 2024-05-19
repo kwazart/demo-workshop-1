@@ -33,13 +33,13 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                sh 'docker build -t summary-img'
+                sh 'make docker_build'
             }
         }
 
-        stage('Build Docker container') {
+        stage('Run Docker container') {
             steps {
-                sh 'docker run -d -p 8000:8000 main.app summary-img'
+                sh 'make docker_run'
             }
         }
     }

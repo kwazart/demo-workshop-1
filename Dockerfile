@@ -1,5 +1,5 @@
 # Используем официальный образ Python
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # Устанавливаем рабочую директорию в контейнере
 WORKDIR /app
@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Запускаем приложение
-CMD ["streamlit", "run", "main.py"]
+CMD ["streamlit run main.py --server.port 7070"]
