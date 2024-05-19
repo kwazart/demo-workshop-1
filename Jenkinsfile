@@ -21,22 +21,22 @@ pipeline {
 
         stage('Running Tests') {
             steps {
-                powershell 'Start-Job -ScriptBlock {pytest ./tests/}'
-                // sh 'pytest ./tests/'
+//                 powershell 'Start-Job -ScriptBlock {pytest ./tests/}'
+                sh 'pytest ./tests/'
             }
         }
 
         stage('Build Docker image') {
             steps {
-                powershell 'Start-Job -ScriptBlock {docker build -t summary-img}'
-                // sh 'docker build -t summary-img'
+//                 powershell 'Start-Job -ScriptBlock {docker build -t summary-img}'
+                sh 'docker build -t summary-img'
             }
         }
 
         stage('Build Docker container') {
             steps {
-                powershell 'Start-Job -ScriptBlock {docker run -d -p 8000:8000 main.app summary-img}'
-                // sh 'docker build -t summary-img'
+//                 powershell 'Start-Job -ScriptBlock {docker run -d -p 8000:8000 main.app summary-img}'
+                sh 'docker build -t summary-img'
             }
         }
     }
