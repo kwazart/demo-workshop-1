@@ -15,6 +15,5 @@ def execute(cloud_model, question, context):
         return "Введите текст в окно выше"
     if question == "":
         return "Введите вопрос в окно выше"
-    
     result = cloud_model(question=question, context=context)
     return result["answer"]
