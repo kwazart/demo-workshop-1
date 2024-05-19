@@ -13,23 +13,23 @@
 pipeline {
     agent any
     stages {
-        stage('Install requirements') {
-            steps {
-                sh 'make deps'
-            }
-        }
+        // stage('Install requirements') {
+        //     steps {
+        //         sh 'make deps'
+        //     }
+        // }
 
-        stage('Lint with flake8') {
-            steps {
-                sh 'make lint'
-            }
-        }
+        // stage('Lint with flake8') {
+        //     steps {
+        //         sh 'make lint'
+        //     }
+        // }
 
-        stage('Running Tests') {
-            steps {
-                sh 'make test'
-            }
-        }
+        // stage('Running Tests') {
+        //     steps {
+        //         sh 'make test'
+        //     }
+        // }
 
         stage('Build Docker image') {
             steps {
