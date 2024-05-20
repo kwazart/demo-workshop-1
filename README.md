@@ -55,16 +55,36 @@ Web-интерфейс написан на [Streamlit](https://streamlit.io/)
 
    - Стянут проект `git clone git@github.com:kwazart/demo-workshop-1.git`
    - Перейти в проект `cd demo-workshop-1`
+   - Перейти в ветку итогового проекта `git checkout mlops`
    - Если не установлена - установить утилиту `make` командой `sudo apt install make` ([пример установки для windows](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows))
    - Если не установлена - установить `venv` для `python`
    - Подготовить окружение (*виртуальная среда, установка пакетов*) командой `make deps`
    - Запустить командой `make run`
+
+   __Локальный запуск в `docker`:__
+
+   - Стянут проект `git clone git@github.com:kwazart/demo-workshop-1.git`
+   - Перейти в проект `cd demo-workshop-1`
+   - Перейти в ветку итогового проекта `git checkout mlops`
+   - Если не установлена - установить утилиту `make` командой `sudo apt install make` ([пример установки для windows](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows))
+   - Если не установлена - установить `venv` для `python`
+   - Подготовить образ контейнера `make docker_build`
+   - Запустить контейнер из образа `make docker_run`
+
+   __Локальный запуск в `docker` через `Jenkins`:__
+
+   - В проекте `https://github.com/kwazart/demo-workshop-1/tree/mlops` есть [Jenkinsfile](Jenkinsfile)
+   - Перейти в интерфейс `Jenkins` (в нашем случае http://localhost:8080/)
+   - Создать `pipeline` с указанием проекта на `github` и необходимой веткой
+   - Указать путь к `Jenkinsfile` в проекте
+   - Запустить `pipeline`
 
    __Запуск в облаке:__
 
    - Подключиться к ВМ в облаке по ssh
    - Стянут проект по https `git clone https://github.com/kwazart/demo-workshop-1.git`
    - Перейти в проект `cd demo-workshop-1`
+   - Перейти в ветку итогового проекта `git checkout mlops`
    - Установить утилиту `make` командой `sudo apt install make`
    - Установить `venv` для `python` командой `sudo apt install python3.10-venv`
    - Подготовить окружение (*виртуальная среда, установка пакетов*) командой `make deps`
