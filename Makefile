@@ -44,9 +44,9 @@ lint:
 # docker build
 .PHONY: docker_build
 docker_build:
-	docker build -t app-img .
+	docker build -t ste-app-img .
 
 # docker run
 .PHONY: docker_run
 docker_run:
-	docker run -d -p 7070:7070 app-img
+	docker run --name ste-app-cont -d -p 7070:7070 ste-app-img
